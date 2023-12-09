@@ -2,22 +2,23 @@ const listsContainer = document.querySelector('[data-lists')
 const newListForm = document.querySelector('[data-new-list-form]')
 const newListInput = document.querySelector('[data-new-list-input]')
 
-// create a variable to hold all our lists 
-// we want an active-list class on whichever list is selected
-// we need to use id's and objects to do that
-let lists = [{
-   id: 1,
-   name: 'name'
-    }, {
-   id: 2,
-   name: 'todo'
-         }]
+// store information to user's browser
+
+const LOCAL_STORAGE_LIST_KEY = 'task.lists'
+let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || []
+
+
+
+
 
 newListForm.addEventListener('submit', e => {
     e.preventDefault() // stop page from refreshing on enter
     const listName = newListInput.value 
     if (listName == null || listName === '') return
     const list = createList(listName)
+    newListInput.value = null
+    lists.push(list)
+    render()
 })
 
 // this function will return an object
@@ -27,6 +28,11 @@ return  {id: Date.now().toString(), // this makes the ID unique
      tasks: []
     }
 }
+
+function save() {
+    localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists))
+}
+
 // create a function that renders list 
 
 function render() {
