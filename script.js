@@ -1,7 +1,7 @@
 const listsContainer = document.querySelector('[data-lists')
 
 // create a variable to hold all our lists 
-let lists = []
+let lists = ['name', 'todo']
 
 // create a function that renders list 
 
@@ -16,7 +16,9 @@ function render() {
 }
 
 function clearElement(element) {
-
+    while(element.firstChild) {
+        element.removeChild(element.firstChild)
+    }
 }
 
 render()
