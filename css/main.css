@@ -43,3 +43,44 @@
     list-style: circle;
     padding-left: 1.1em;
   }
+
+  .list-name {
+    cursor: pointer;
+  }
+  
+  .list-name:hover {
+    opacity: 0.7;
+  }
+  
+  form {
+    display: flex;
+  }
+
+  .btn {
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    padding: 0;
+    color: inherit;
+  }
+  
+  .btn.create {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-right: 0.25em;
+    transition: opacity 250ms ease-in;
+  }
+  
+  .btn.create:hover {
+    opacity: 0.7;
+  }
+  
+  .btn.delete {
+    opacity: 0.7;
+    font-size: 1rem;
+    transition: color 200ms;
+  }
+  
+  .btn.delete:hover {
+    color: var(--clr-warning);
+  } 
