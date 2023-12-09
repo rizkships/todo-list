@@ -160,3 +160,47 @@
     justify-content: space-between;
   }
   
+  .list-title {
+    margin: 0 1em 0 0;
+  }
+  
+  .task-count {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .todo-body {
+    padding: var(--spacer);
+    position: relative;
+  }
+  
+  .new-task-creator .create {
+    color: var(--clr-primary);
+  }
+  
+  [type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .task label {
+    display: flex-inline;
+    align-items: center;
+    position: relative;
+  }
+  
+  .task {
+    position: relative;
+    margin-bottom: 1.25em;
+  }
+  
+  .task::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -0.5em;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.1;
+  }
