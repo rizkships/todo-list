@@ -1,6 +1,7 @@
 const listsContainer = document.querySelector('[data-lists')
 const newListForm = document.querySelector('[data-new-list-form]')
 const newListInput = document.querySelector('[data-new-list-input]')
+const deleteListButton = document.querySelector('[data-delete-list-button]')
 
 // store information to user's browser
 
@@ -16,7 +17,11 @@ listsContainer.addEventListener('click', e => {
     }
 })
 
-
+deleteListButton.addEventListener('click', e => {
+    lists = lists.filter(list => list.id !== selectedListId )
+    selectedListId = null
+    saveAndRender()
+})
 
 newListForm.addEventListener('submit', e => {
     e.preventDefault() // stop page from refreshing on enter
