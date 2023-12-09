@@ -18,7 +18,7 @@ newListForm.addEventListener('submit', e => {
     const list = createList(listName)
     newListInput.value = null
     lists.push(list)
-    render()
+    saveAndRender()
 })
 
 // this function will return an object
@@ -27,6 +27,11 @@ return  {id: Date.now().toString(), // this makes the ID unique
      name: name,
      tasks: []
     }
+}
+
+function saveAndRender(){
+    save()
+    render()
 }
 
 function save() {
