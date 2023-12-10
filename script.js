@@ -9,6 +9,7 @@ const taskContainer = document.querySelector('[data-tasks]')
 const taskTemplate = document.getElementById('task-template')
 const newTaskForm = document.querySelector('[data-new-task-form]')
 const newTaskInput = document.querySelector('[data-new-task-input]')
+const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]')
 
 // store information to user's browser
 
@@ -25,16 +26,22 @@ listsContainer.addEventListener('click', e => {
 })
 
 tasksContainer.addEventListener('click', e => {
+    // if it equals to input, that means we clicked on the checkbox
     if (e.target.tagName.toLowerCase() === 'input') {
      const selectedList = lists.find(list => list.id === selectedListId)
      const selectedTask = selectedList.tasks.find(task => task.id ===
-        e.target.id)
-        selectedTask.complete = e.target.checked
-        save
+        e.target.id) // e.target.id is the checkbox id and in our renderTasks function we set the checkbox.id to the task.id
+        selectedTask.complete = e.target.checked  // this works whether we check it or not because it will give true/false value 
+        save()
         renderTaskCount(selectedList)
     }
 })
 
+clearCompleteTasksButton.addEventListener('click', e => {
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+    saveAndRender()
+})
 
 deleteListButton.addEventListener('click', e => {
     // to delete, set our list to a new list with specified parameters (give me all the lists that are not the one we have selected)
