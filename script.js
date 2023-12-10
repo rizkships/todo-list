@@ -68,8 +68,17 @@ function render() {
     } else {
         listDisplayContainer.style.display = ''
         listTitleElement.innerText = selectedList.name
-        
+        renderTaskCount(selectedList)
+        clearElement(tasksContainer)
+        renderTasks(selectedList)
+
     }
+}
+
+function renderTaskCount(selectedList) {
+    const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length // get count of all tasks that are not complete
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks"
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
 }
 
 function renderLists() {
