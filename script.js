@@ -62,11 +62,13 @@ function save() {
 function render() {
     clearElement(listsContainer)
     renderLists()
-    
+    const selectedList = lists.find(list => list.id === selectedListId) // find the list that has id of our selected list 
     if (selectedListId == null) {
         listDisplayContainer.style.display = 'none' // if we dont have any selected lists, display nothing
     } else {
-
+        listDisplayContainer.style.display = ''
+        listTitleElement.innerText = selectedList.name
+        
     }
 }
 
