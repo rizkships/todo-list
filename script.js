@@ -6,6 +6,9 @@ const listDisplayContainer = document.querySelector('[data-list-display-containe
 const listTitleElement = document.querySelector('[data-list-title')
 const listCountElement = document.querySelector('[data-list-count')
 const taskContainer = document.querySelector('[data-tasks]')
+const taskTemplate = document.getElementById('task-template')
+const newTaskForm = document.querySelector('[data-new-task-form]')
+const newTaskInput = document.querySelector('[data-new-task-input]')
 
 // store information to user's browser
 
@@ -39,6 +42,17 @@ newListForm.addEventListener('submit', e => {
     saveAndRender()
 })
 
+newTaskForm.addEventListener('submit', e => {
+    e.preventDefault() // stop page from refreshing on enter
+    const taskName = newTaskInput.value 
+    if (taskName == null || taskName === '') return
+    const task = createTask(taskName)
+    newTaskInput.value = null
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks.push(task)
+    saveAndRender()
+})
+
 // this function will return an object
 function createList(name) {
 return  {id: Date.now().toString(), // this makes the ID unique
@@ -46,6 +60,14 @@ return  {id: Date.now().toString(), // this makes the ID unique
      tasks: []
     }
 }
+
+function createTask(name) {
+    return  {id: Date.now().toString(), // this makes the ID unique
+         name: name,
+         complete: false
+        }
+    }
+
 
 function saveAndRender(){
     save()
@@ -73,6 +95,20 @@ function render() {
         renderTasks(selectedList)
 
     }
+}
+
+function renderTasks(selectedList) {
+    selectedList.tasks.forEach(task => {
+        const taskElement = document.importNode(taskTemplate.content, true)
+        const checkbox = taskElement.querySelector('input')
+        checkbox.id = task.id
+        checkbox.checked = task.complete
+        const label = taskElement.querySelector('label')
+        label.htmlFor = task.id
+        label.append(task.name)
+        tasksContainer.appendChild(taskElement)
+
+    })
 }
 
 function renderTaskCount(selectedList) {
