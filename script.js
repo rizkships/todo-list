@@ -2,6 +2,10 @@ const listsContainer = document.querySelector('[data-lists')
 const newListForm = document.querySelector('[data-new-list-form]')
 const newListInput = document.querySelector('[data-new-list-input]')
 const deleteListButton = document.querySelector('[data-delete-list-button]')
+const listDisplayContainer = document.querySelector('[data-list-display-container]')
+const listTitleElement = document.querySelector('[data-list-title')
+const listCountElement = document.querySelector('[data-list-count')
+const taskContainer = document.querySelector('[data-tasks]')
 
 // store information to user's browser
 
@@ -17,9 +21,11 @@ listsContainer.addEventListener('click', e => {
     }
 })
 
+
 deleteListButton.addEventListener('click', e => {
-    lists = lists.filter(list => list.id !== selectedListId )
-    selectedListId = null
+    // to delete, set our list to a new list with specified parameters (give me all the lists that are not the one we have selected)
+    lists = lists.filter(list => list.id !== selectedListId ) // as long as list.id does not equal seletedlistId
+    selectedListId = null // set it to null because we no longer have a selectedlist 
     saveAndRender()
 })
 
@@ -55,6 +61,17 @@ function save() {
 
 function render() {
     clearElement(listsContainer)
+    renderLists()
+    
+    if (selectedListId == null) {
+        listDisplayContainer.style.display = 'none' // if we dont have any selected lists, display nothing
+    } else {
+
+    }
+}
+
+function renderLists() {
+
     lists.forEach(list => {
         const listElement = document.createElement('li')
         listElement.dataset.listId = list.id
